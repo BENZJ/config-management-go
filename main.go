@@ -9,7 +9,7 @@ import (
 
 func main() {
 	// 读取配置文件
-	config, err := config.ReadConfig("./config/dev.yaml")
+	config, err := config.ReadConfig("./config/local.yaml")
 	if err != nil {
 		fmt.Println(err)
 		return
