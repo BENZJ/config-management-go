@@ -2,36 +2,44 @@ package config
 
 import (
 	"os"
+	"sync"
 
 	"gopkg.in/yaml.v2"
 )
 
+var (
+	C    = new(Config)
+	once sync.Once
+)
+
 // 配置结构体
 type Config struct {
-	Gorm struct {
-		Driver string `yaml:"driver"`
-		Dsn    string `yaml:"dsn"`
-	} `yaml:"gorm"`
-	SqlLite struct {
-		Path string `yaml:"path"`
-	} `yaml:"sqlLite"`
+	Gorm Gorm `yaml:"gorm"`
+}
+
+type Gorm struct {
+	Driver string `yaml:"driver"`
+	Dsn    string `yaml:"dsn"`
+}
+
+func MustLoad(filename string) {
+	readConfig(filename)
 }
 
 // 读取配置
-func ReadConfig(filename string) (*Config, error) {
+func readConfig(filename string) error {
 	// 打开配置文件
 	f, err := os.Open(filename)
 	if err != nil {
-		return nil, err
+		return err
 	}
 	defer f.Close()
 
 	// 解析配置文件
-	config := &Config{}
-	err = yaml.NewDecoder(f).Decode(config)
+	err = yaml.NewDecoder(f).Decode(C)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	return config, nil
+	return nil
 }
