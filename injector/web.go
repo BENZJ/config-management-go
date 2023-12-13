@@ -1,12 +1,12 @@
 package injector
 
 import (
-	"config-management-go/models/iteration"
+	"config-management-go/service/iteration"
 
 	"github.com/gin-gonic/gin"
 )
 
-func InitGinEngine(iteration.Repository) *gin.Engine {
+func InitGinEngine(iteration.Service) *gin.Engine {
 	app := gin.Default()
 	return app
 }

@@ -8,6 +8,11 @@ package injector
 
 import (
 	"config-management-go/models/iteration"
+	iteration2 "config-management-go/service/iteration"
+)
+
+import (
+	_ "github.com/go-sql-driver/mysql"
 )
 
 // Injectors from wire.go:
@@ -18,7 +23,8 @@ func BuildApiInjector() (*ApiInjector, func(), error) {
 		return nil, nil, err
 	}
 	repository := iteration.NewRepository(db)
-	engine := InitGinEngine(repository)
+	service := iteration2.NewService(repository)
+	engine := InitGinEngine(service)
 	apiInjector := NewApiInjector(engine)
 	return apiInjector, func() {
 		cleanup()
