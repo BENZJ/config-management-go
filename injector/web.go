@@ -1,12 +1,11 @@
 package injector
 
 import (
-	"config-management-go/service/iteration"
-
 	"github.com/gin-gonic/gin"
 )
 
-func InitGinEngine(iteration.Service) *gin.Engine {
+func InitGinEngine(col ControllerInjector) *gin.Engine {
 	app := gin.Default()
+	col.IterationController.Register(app)
 	return app
 }

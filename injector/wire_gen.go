@@ -7,6 +7,7 @@
 package injector
 
 import (
+	"config-management-go/controller"
 	"config-management-go/models/iteration"
 	iteration2 "config-management-go/service/iteration"
 )
@@ -24,7 +25,9 @@ func BuildApiInjector() (*ApiInjector, func(), error) {
 	}
 	repository := iteration.NewRepository(db)
 	service := iteration2.NewService(repository)
-	engine := InitGinEngine(service)
+	iterationController := controller.NewIterationController(service)
+	controllerInjector := NewControllerInjector(iterationController)
+	engine := InitGinEngine(controllerInjector)
 	apiInjector := NewApiInjector(engine)
 	return apiInjector, func() {
 		cleanup()
