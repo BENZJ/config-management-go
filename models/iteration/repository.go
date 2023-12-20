@@ -15,3 +15,7 @@ func NewRepository(db *gorm.DB) Repository {
 func (rep *repositoryImpl) Create(item *Iteration) error {
 	return rep.db.Create(item).Error
 }
+
+func (rep *repositoryImpl) ListAll(iterations *[]Iteration) error {
+	return rep.db.Find(iterations).Error
+}

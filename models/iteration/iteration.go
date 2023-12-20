@@ -16,4 +16,5 @@ func (iteration *Iteration) TableName() string {
 
 type Repository interface {
 	Create(item *Iteration) error
+	ListAll(iterations *[]Iteration) error
 }
