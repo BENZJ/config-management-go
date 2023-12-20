@@ -20,12 +20,15 @@ type ApiInjector struct {
 
 func NewControllerInjector(
 	iterationController controller.IterationController,
+	fileController controller.FileController,
 ) ControllerInjector {
 	return ControllerInjector{
 		IterationController: iterationController,
+		FileController:      fileController,
 	}
 }
 
 type ControllerInjector struct {
 	IterationController controller.IterationController
+	FileController      controller.FileController
 }
