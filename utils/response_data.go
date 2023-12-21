@@ -6,3 +6,11 @@ type ResponseData struct {
 	Message string      `json:"message"`
 	Data    interface{} `json:"data"`
 }
+
+func NewResponseData(code int, message string, data interface{}) *ResponseData {
+	return &ResponseData{
+		Code:    code,
+		Message: message,
+		Data:    data,
+	}
+}

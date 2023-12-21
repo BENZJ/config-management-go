@@ -7,22 +7,22 @@ type repositoryImpl struct {
 }
 
 // Create implements Repository.
-func (*repositoryImpl) Create(item *File) error {
-	panic("unimplemented")
+func (rep *repositoryImpl) Create(item *File) error {
+	return rep.db.Create(item).Error
 }
 
 // DeleteItem implements Repository.
-func (*repositoryImpl) DeleteItem(id int) error {
+func (rep *repositoryImpl) DeleteItem(id int) error {
 	panic("unimplemented")
 }
 
 // ListAll implements Repository.
-func (*repositoryImpl) ListAll(files *[]File) error {
-	panic("unimplemented")
+func (rep *repositoryImpl) ListAll(iterationId int, files *[]File) error {
+	return rep.db.Where("iteration_id= ?", iterationId).Find(&files).Error
 }
 
 // ModifyItem implements Repository.
-func (*repositoryImpl) ModifyItem(file *File) error {
+func (rep *repositoryImpl) ModifyItem(file *File) error {
 	panic("unimplemented")
 }
 

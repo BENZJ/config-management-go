@@ -22,5 +22,6 @@ type FileController struct {
 func (c *FileController) Register(app *gin.Engine) error {
 	g := app.Group("/file")
 	g.POST("/create", c.fileService.CreateFile)
+	g.GET("/list", c.fileService.ListByIteration)
 	return nil
 }
