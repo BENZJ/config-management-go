@@ -22,12 +22,12 @@ type FieldItem struct {
 }
 
 func (fileItem *FieldItem) TableName() string {
-	return "file_item"
+	return "file_items"
 }
 
 type Repository interface {
 	Create(item *FieldItem) error
-	ListAll(items *[]FieldItem) error
+	ListAll(fileId int, items *[]FieldItem) error
 	DeleteItem(id int) error
 	ModifyItem(item *FieldItem) error
 }

@@ -9,8 +9,10 @@ package injector
 import (
 	"config-management-go/controller"
 	"config-management-go/models/file"
+	"config-management-go/models/file_item"
 	"config-management-go/models/iteration"
 	file2 "config-management-go/service/file"
+	fileitem2 "config-management-go/service/file_item"
 	iteration2 "config-management-go/service/iteration"
 )
 
@@ -31,7 +33,10 @@ func BuildApiInjector() (*ApiInjector, func(), error) {
 	fileRepository := file.NewRepository(db)
 	fileService := file2.NewService(fileRepository)
 	fileController := controller.NewFileController(fileService)
-	controllerInjector := NewControllerInjector(iterationController, fileController)
+	fileitemRepository := fileitem.NewRepository(db)
+	fileitemService := fileitem2.NewService(fileitemRepository)
+	fileItemController := controller.NewFileItemController(fileitemService)
+	controllerInjector := NewControllerInjector(iterationController, fileController, fileItemController)
 	engine := InitGinEngine(controllerInjector)
 	apiInjector := NewApiInjector(engine)
 	return apiInjector, func() {

@@ -7,23 +7,23 @@ type repositoryImpl struct {
 }
 
 // Create implements Repository.
-func (*repositoryImpl) Create(item *FieldItem) error {
-	panic("unimplemented")
+func (rep *repositoryImpl) Create(item *FieldItem) error {
+	return rep.db.Create(item).Error
 }
 
 // DeleteItem implements Repository.
-func (*repositoryImpl) DeleteItem(id int) error {
+func (rep *repositoryImpl) DeleteItem(id int) error {
 	panic("unimplemented")
 }
 
 // ListAll implements Repository.
-func (*repositoryImpl) ListAll(items *[]FieldItem) error {
-	panic("unimplemented")
+func (rep *repositoryImpl) ListAll(fileId int, items *[]FieldItem) error {
+	return rep.db.Where("iteration_id= ?", fileId).Find(&items).Error
 }
 
 // ModifyItem implements Repository.
-func (*repositoryImpl) ModifyItem(item *FieldItem) error {
-	panic("unimplemented")
+func (rep *repositoryImpl) ModifyItem(item *FieldItem) error {
+	return rep.db.Save(&item).Error
 }
 
 func NewRepository(db *gorm.DB) Repository {

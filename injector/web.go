@@ -8,5 +8,6 @@ func InitGinEngine(col ControllerInjector) *gin.Engine {
 	app := gin.Default()
 	col.IterationController.Register(app)
 	col.FileController.Register(app)
+	col.FileItemController.Register(app)
 	return app
 }

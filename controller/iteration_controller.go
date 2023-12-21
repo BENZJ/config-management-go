@@ -22,6 +22,6 @@ type IterationController struct {
 func (c *IterationController) Register(app *gin.Engine) error {
 	g := app.Group("/iteration")
 	g.POST("/create", c.iterationService.CreateIteration)
-	g.GET("/listAll", c.iterationService.GetIterationList)
+	g.GET("/list", c.iterationService.GetIterationList)
 	return nil
 }

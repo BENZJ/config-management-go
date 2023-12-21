@@ -7,8 +7,10 @@ package injector
 import (
 	controller "config-management-go/controller"
 	"config-management-go/models/file"
+	fileitem "config-management-go/models/file_item"
 	"config-management-go/models/iteration"
 	fileService "config-management-go/service/file"
+	fileItemService "config-management-go/service/file_item"
 	iterationService "config-management-go/service/iteration"
 
 	"github.com/google/wire"
@@ -19,10 +21,13 @@ func BuildApiInjector() (*ApiInjector, func(), error) {
 		InitGormDB,
 		iteration.NewRepository,
 		file.NewRepository,
+		fileitem.NewRepository,
 		fileService.NewService,
 		iterationService.NewService,
+		fileItemService.NewService,
 		controller.NewIterationController,
 		controller.NewFileController,
+		controller.NewFileItemController,
 		NewControllerInjector,
 		InitGinEngine,
 		NewApiInjector,
