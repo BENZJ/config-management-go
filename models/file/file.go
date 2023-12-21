@@ -24,4 +24,5 @@ type Repository interface {
 	ListAll(iterationId int, files *[]File) error
 	DeleteItem(id int) error
 	ModifyItem(file *File) error
+	ListById(id int, file *File) error
 }

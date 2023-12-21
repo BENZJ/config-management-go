@@ -18,7 +18,7 @@ func (rep *repositoryImpl) DeleteItem(id int) error {
 
 // ListAll implements Repository.
 func (rep *repositoryImpl) ListAll(fileId int, items *[]FieldItem) error {
-	return rep.db.Where("iteration_id= ?", fileId).Find(&items).Error
+	return rep.db.Where("file_id= ?", fileId).Find(&items).Error
 }
 
 // ModifyItem implements Repository.

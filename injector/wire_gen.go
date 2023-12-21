@@ -34,7 +34,7 @@ func BuildApiInjector() (*ApiInjector, func(), error) {
 	fileService := file2.NewService(fileRepository)
 	fileController := controller.NewFileController(fileService)
 	fileitemRepository := fileitem.NewRepository(db)
-	fileitemService := fileitem2.NewService(fileitemRepository)
+	fileitemService := fileitem2.NewService(fileitemRepository, fileRepository)
 	fileItemController := controller.NewFileItemController(fileitemService)
 	controllerInjector := NewControllerInjector(iterationController, fileController, fileItemController)
 	engine := InitGinEngine(controllerInjector)

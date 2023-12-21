@@ -21,6 +21,11 @@ func (rep *repositoryImpl) ListAll(iterationId int, files *[]File) error {
 	return rep.db.Where("iteration_id= ?", iterationId).Find(&files).Error
 }
 
+// ListAll implements Repository.
+func (rep *repositoryImpl) ListById(id int, file *File) error {
+	return rep.db.Where("id= ?", id).Find(&file).Error
+}
+
 // ModifyItem implements Repository.
 func (rep *repositoryImpl) ModifyItem(file *File) error {
 	panic("unimplemented")
