@@ -23,7 +23,12 @@ func (rep *repositoryImpl) ListAll(fileId int, items *[]FieldItem) error {
 
 // ModifyItem implements Repository.
 func (rep *repositoryImpl) ModifyItem(item *FieldItem) error {
-	return rep.db.Save(&item).Error
+	result := rep.db.Model(&FieldItem{}).Where("id = ?", item.ID).
+		Updates(map[string]interface{}{
+			"Content":   item.Content,
+			"UpdatedBy": item.UpdatedBy,
+		})
+	return result.Error
 }
 
 func NewRepository(db *gorm.DB) Repository {

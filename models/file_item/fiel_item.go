@@ -12,9 +12,9 @@ type FieldItem struct {
 	FileID      int       `gorm:"not null"`
 	Content     string    `gorm:"not null"`
 	CreatedAt   time.Time `gorm:"not null"`
-	CreatedBy   int       `gorm:"not null"`
+	CreatedBy   string    `gorm:"not null"`
 	UpdatedAt   time.Time `gorm:"null"`
-	UpdatedBy   int       `gorm:"null"`
+	UpdatedBy   string    `gorm:"null"`
 
 	// Gorm 外键关联
 	Iteration iteration.Iteration `gorm:"foreignkey:IterationID"`

@@ -21,6 +21,23 @@ type service struct {
 	fileItemRepo fileitem.Repository
 }
 
+// ModifyFileItem implements Service.
+func (s *service) ModifyFileItem(c *gin.Context) {
+	var req request.FileItem
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err})
+		return
+	}
+	fileItem := fileitem.FieldItem{
+		ID:        req.ID,
+		Content:   req.Content,
+		UpdatedBy: req.UpdatedBy,
+	}
+	s.fileItemRepo.ModifyItem(&fileItem)
+	c.JSON(http.StatusOK, utils.NewResponseData(http.StatusOK, "success", &fileItem))
+	return
+}
+
 // CreateFile implements Service.
 func (s *service) CreateFileItem(c *gin.Context) {
 	var req request.FileItem
@@ -42,4 +59,5 @@ func (s *service) CreateFileItem(c *gin.Context) {
 
 type Service interface {
 	CreateFileItem(c *gin.Context)
+	ModifyFileItem(c *gin.Context)
 }

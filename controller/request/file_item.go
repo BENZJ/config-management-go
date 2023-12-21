@@ -8,7 +8,7 @@ type FileItem struct {
 	FileID      int       `json:"fileID"`
 	Content     string    `json:"content"`
 	CreatedAt   time.Time `json:"createdAt"`
-	CreatedBy   int       `json:"createdBy"`
+	CreatedBy   string    `json:"createdBy"`
 	UpdatedAt   time.Time `json:"updatedAt"`
-	UpdatedBy   int       `json:"updatedBy"`
+	UpdatedBy   string    `json:"updatedBy"`
 }

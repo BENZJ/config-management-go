@@ -22,5 +22,6 @@ type FileItemController struct {
 func (c *FileItemController) Register(app *gin.Engine) error {
 	g := app.Group("/fileItem")
 	g.POST("/create", c.fileItemService.CreateFileItem)
+	g.POST("/modify", c.fileItemService.ModifyFileItem)
 	return nil
 }
