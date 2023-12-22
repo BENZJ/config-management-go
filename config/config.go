@@ -14,12 +14,16 @@ var (
 
 // 配置结构体
 type Config struct {
-	Gorm Gorm `yaml:"gorm"`
+	Gorm      Gorm      `yaml:"gorm"`
+	WebConfig WebConfig `yaml:"webConfig"`
 }
 
 type Gorm struct {
 	Driver string `yaml:"driver"`
 	Dsn    string `yaml:"dsn"`
+}
+type WebConfig struct {
+	Port string `yaml:"port"`
 }
 
 func MustLoad(filename string) {

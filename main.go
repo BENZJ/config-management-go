@@ -14,6 +14,6 @@ func main() {
 		panic(err)
 	}
 	defer cleanup()
-	app.Engine.Run()
+	app.Engine.Run(":" + config.C.WebConfig.Port)
 	// fmt.Print(app)
 }
