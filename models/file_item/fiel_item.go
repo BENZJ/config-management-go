@@ -3,22 +3,23 @@ package fileitem
 import (
 	"config-management-go/models/file"
 	"config-management-go/models/iteration"
-	"time"
+	"config-management-go/utils"
 )
 
 type FieldItem struct {
-	ID          int       `gorm:"primary_key;auto_increment"`
-	IterationID int       `gorm:"not null"`
-	FileID      int       `gorm:"not null"`
-	Content     string    `gorm:"not null"`
-	CreatedAt   time.Time `gorm:"not null"`
-	CreatedBy   string    `gorm:"not null"`
-	UpdatedAt   time.Time `gorm:"null"`
-	UpdatedBy   string    `gorm:"null"`
+	ID          int            `gorm:"primary_key;auto_increment" json:"id"`
+	IterationID int            `gorm:"null" json:"iterationId"`
+	FileID      int            `gorm:"null" json:"fileId"`
+	Content     string         `gorm:"null" json:"content"`
+	CreatedAt   utils.Datetime `gorm:"null" json:"createdAt"`
+	CreatedBy   string         `gorm:"default:CURRENT_TIMESTAMP" json:"createdBy"`
+	UpdatedAt   utils.Datetime `gorm:"null" json:"updatedAt"`
+	UpdatedBy   string         `gorm:"null" json:"updatedBy"`
+	Remark      string         `gorm:"null" json:"remark"`
 
 	// Gorm 外键关联
-	Iteration iteration.Iteration `gorm:"foreignkey:IterationID"`
-	File      file.File           `gorm:"foreignkey:FileID"`
+	Iteration iteration.Iteration `gorm:"foreignkey:IterationID" json:"iteration"`
+	File      file.File           `gorm:"foreignkey:FileID" json:"file"`
 }
 
 func (fileItem *FieldItem) TableName() string {

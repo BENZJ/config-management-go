@@ -11,4 +11,5 @@ type FileItem struct {
 	CreatedBy   string    `json:"createdBy"`
 	UpdatedAt   time.Time `json:"updatedAt"`
 	UpdatedBy   string    `json:"updatedBy"`
+	Remark      string    `json:"remark"`
 }

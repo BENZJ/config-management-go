@@ -6,11 +6,11 @@ import (
 )
 
 type File struct {
-	ID          int       `gorm:"primary_key;auto_increment"`
-	IterationID int       `gorm:"not null"`
-	FileName    string    `gorm:"not null"`
-	CreatedAt   time.Time `gorm:"default:CURRENT_TIMESTAMP"`
-
+	ID          int       `gorm:"primary_key;auto_increment" json:"id"`
+	IterationID int       `gorm:"null" json:"iterationId"`
+	FileName    string    `gorm:"null" json:"fileName"`
+	CreatedAt   time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"createdAt"`
+	Remark      string    `gorm:"null" json:"remark"`
 	// Gorm 外键关联
 	Iteration iteration.Iteration `gorm:"foreignkey:IterationID"`
 }

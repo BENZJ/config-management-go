@@ -109,16 +109,29 @@ func (s *service) CreateFileItem(c *gin.Context) {
 		FileID:      req.FileID,
 		IterationID: req.IterationID,
 		Content:     req.Content,
-		CreatedBy:   req.CreatedBy,
-		UpdatedBy:   req.UpdatedBy,
+		Remark:      req.Remark,
 	}
 	s.fileItemRepo.Create(&fileItem)
 	c.JSON(http.StatusOK, utils.NewResponseData(http.StatusOK, "success", &fileItem))
-	return
+}
+
+// CreateFile implements Service.
+func (s *service) ListAllFileItem(c *gin.Context) {
+	idStr := c.Query("fileId")
+	fileId, err := strconv.Atoi(idStr)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err})
+		return
+	}
+	var items []fileitem.FieldItem
+	//查询所有文件项目
+	s.fileItemRepo.ListAll(fileId, &items)
+	c.JSON(http.StatusOK, utils.NewResponseData(http.StatusOK, "success", &items))
 }
 
 type Service interface {
 	CreateFileItem(c *gin.Context)
 	ModifyFileItem(c *gin.Context)
 	GetFilePreview(c *gin.Context)
+	ListAllFileItem(c *gin.Context)
 }
