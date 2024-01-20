@@ -1,4 +1,5 @@
 config/local.yaml
 config-management-go
 config-management-go.exe
+__debug_bin
 *.exe

@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -109,6 +110,8 @@ func (s *service) CreateFileItem(c *gin.Context) {
 		FileID:      req.FileID,
 		IterationID: req.IterationID,
 		Content:     req.Content,
+		CreatedBy:   req.UpdatedBy,
+		CreatedAt:   utils.Datetime(time.Now()),
 		Remark:      req.Remark,
 	}
 	s.fileItemRepo.Create(&fileItem)
